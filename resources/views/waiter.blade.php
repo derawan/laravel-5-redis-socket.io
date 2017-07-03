@@ -54,23 +54,23 @@
 
 <div id="content">
     @foreach($orders as $order)
-        <div class="panel {{$order['done']== 'true' ? 'panel-success' : 'panel-info' }}
-                panel-style" data-id="{{$order['id']}}" >
+        <div class="panel {{$order->done== 'true' ? 'panel-success' : 'panel-info' }}
+                panel-style" data-id="{{$order->id}}" >
             <!-- Default panel contents -->
-            <div class="panel-heading">{{$order['done']== 'true' ? 'Done' : 'Cooking...'}}</div>
+            <div class="panel-heading">{{$order->done== 'true' ? 'Done' : 'Cooking...'}}</div>
             <div class="panel-body">
                 <!-- List group -->
                 <ul class="list-group">
-                    <li class="list-group-item"><b>Name: </b>{{$order['name']}}</li>
-                    <li class="list-group-item"><b>Table: </b>{{$order['table']}}</li>
-                    <li class="list-group-item"><b>Dish: </b>{{$order['dish']}}</li>
+                    <li class="list-group-item"><b>Name: </b>{{$order->name}}</li>
+                    <li class="list-group-item"><b>Table: </b>{{$order->table}}</li>
+                    <li class="list-group-item"><b>Dish: </b>{{$order->dish}}</li>
                     <li class="list-group-item js-time"
-                        data-time-of='{{$order['timeOfOrder']}}'
-                        data-time-to='{{$order['timeToOrder']}}'><b>Time: <span class="js-clock"></span> </b></li>
+                        data-time-of='{{$order->timeOfOrder}}'
+                        data-time-to='{{$order->timeToOrder}}'><b>Time: <span class="js-clock"></span> </b></li>
                 </ul>
             </div>
             <a id="btn-submit" type="submit" class="btn btn-danger js-delete
-            @if ($order['done']== 'false') {{'disabled'}} @endif ">Delete</a>
+            @if ($order->done== 'false') {{'disabled'}} @endif ">Delete</a>
         </div>
     @endforeach
 </div>

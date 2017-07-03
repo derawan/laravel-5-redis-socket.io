@@ -18,10 +18,4 @@ class Orders extends Model
         'done',
         'name'];
     protected $guarded = ['id'];
-
-    public function getCurrentOrders (){
-        $orders = Orders::all()->toArray();
-        $orders =array_reverse( $orders);
-        return compact('orders');
-    }
 }

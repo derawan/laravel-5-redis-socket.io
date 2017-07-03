@@ -8,8 +8,7 @@ use App\Orders;
 class WaiterController extends Controller
 {
     public function getOrders(){
-	    $orders = new Orders;
-	    $getOrders = $orders->getCurrentOrders();
-	    return view('waiter',$getOrders);
+	    $orders = Orders::all()->reverse();
+	    return view('waiter', compact('orders'));
     }
 }

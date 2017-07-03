@@ -8,8 +8,7 @@ use App\Orders;
 class CookController extends Controller
 {
     public function getOrders(){
-	    $orders = new Orders;
-	    $getOrders = $orders->getCurrentOrders();
-	    return view('cook',$getOrders);
+	    $orders = Orders::all()->reverse();
+	    return view('cook', compact('orders'));
     }
 }
