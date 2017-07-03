@@ -16,9 +16,8 @@ class CreateOrdersTable extends Migration
             $table->string('timeToOrder');
             $table->string('timeOfOrder');
             $table->string('done');
-            $table->string('delete');
             $table->string('name');
-            $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

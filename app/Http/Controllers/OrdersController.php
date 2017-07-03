@@ -1,21 +1,21 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Redis;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use App\Orders;
 use Illuminate\Database\Query;
 use Auth;
+use Carbon\Carbon;
 
 class OrdersController extends Controller
 {
     public function newOrder (Request $request) {
 		$form = $request->all();
 	    $form ['done'] = 'false';
-	    $form ['delete'] =  'false';
 	    $form ['name'] = Auth::user()->name;
-	    $form ['timeOfOrder'] = time();
+	    $form ['timeOfOrder'] = Carbon::now()->timestamp;
+	    $form ['created_at'] = Carbon::now();
+	    $form ['updated_at'] = Carbon::now();
 	    $form ['id'] = Orders::insertGetId($form);
 	    event(new \App\Events\NewOrder($form ));
     }
@@ -32,11 +32,7 @@ class OrdersController extends Controller
 
 	public function delete (Request $request){
 		$id = $request->delete;
-		$order = Orders::find($id);
-		$order->update([
-				'delete' => 'true'
-		]);
-		$order->save;
+		$order = Orders::destroy($id);
 		event(new \App\Events\DeleteOrder($id));
 	}
 
