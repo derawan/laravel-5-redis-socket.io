@@ -22,11 +22,9 @@ class OrdersController extends Controller
 
 	public function done (Request $request) {
 		$id = $request->id;
-		$order = Orders::find($id);
-		$order->update([
+		Orders::find($id)->update([
 				'done' => 'true'
 		]);
-		$order->save;
 		event(new \App\Events\OrderDone($id));
 	}
 
